@@ -1,13 +1,38 @@
 <!--The content below is only a placeholder and can be replaced.-->
-
 <div>
   <header>
-    <div>
-      <div></div>
+    <div id="header-container">
+      <div id="btn-menu-number-quest" (click)="showHiden();">
+        <i class="fas fa-align-justify"></i>
+      </div>
+      <div id="quest-number">Question number</div>
     </div>
   </header>
-  <main>
-
+  <main >
+    <aside>
+      <div>
+        <p *ngFor="let quest  of quests" class="quest" (click)="callQuest(quest)">Quest{{quest.id}}</p>
+      </div>
+    </aside>
+    <div id="quests-container">
+      <div id="option-answer">
+        <app-question></app-question>
+      </div>
+      <div id="cont-quest">
+        <div id="progress-indicator-container" >
+          <div *ngFor="let quest of quests" (click)="callQuest(quest)" id="{{quest.id}}" class="indicator"></div>
+        </div>
+        <div id="quest-panel">
+          <div id="quest">
+            <p class="text-quest"> {{quests[numQuest - 1].id}}/{{len}} Quest {{quests[numQuest - 1].id}}</p>
+            <p class="text-quest">{{quests[numQuest - 1].description}}</p>
+            <p class="text-quest">answer...</p>
+          </div>
+          <input class="quest-btn" type="button" value="Submit">
+          <input class="quest-btn" type="button" value="Next">
+        </div>
+      </div>
+    </div>
   </main>
 </div>
 

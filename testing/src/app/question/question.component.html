@@ -1,3 +1,24 @@
-<p>
-  question works!
-</p>
+
+<div>
+  <p>Select one: </p>
+  <div *ngIf="numQuest">
+    <div>
+      <div class="answer">
+        {{quests[numQuest - 1].optionAnswer.answer1}}
+        <p class="check"></p>
+      </div>
+      <div class="answer">
+        {{quests[numQuest - 1].optionAnswer.answer2}}
+        <p class="check"></p>
+      </div>
+      <div class="answer">
+        {{quests[numQuest - 1].optionAnswer.answer3}}
+        <p class="check"></p>
+      </div>
+      <div class="answer">
+        {{quests[numQuest - 1].optionAnswer.answer4}}
+        <p class="check"></p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Quests } from '../mock-date/quests';
+import { AppComponent } from "../app.component";
 
 @Component({
   selector: 'app-question',
@@ -6,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./question.component.scss']
 })
 export class QuestionComponent implements OnInit {
-
-  constructor() { }
+  quests = Quests;
+  numQuest = 1;
+  constructor(private component: AppComponent) { }
 
   ngOnInit() {
+    this.component.sub.subscribe(x =>  this.numQuest = x ? x : 1);
   }
 
 }

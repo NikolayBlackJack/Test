@@ -1,0 +1,14 @@
+<component name="CopyrightManager">
+  <settings>
+    <LanguageOptions name="CSS">
+      <option name="fileTypeOverride" value="3" />
+    </LanguageOptions>
+    <LanguageOptions name="ECMAScript 6">
+      <option name="fileTypeOverride" value="3" />
+    </LanguageOptions>
+    <LanguageOptions name="SCSS">
+      <option name="fileTypeOverride" value="3" />
+    </LanguageOptions>
+    <LanguageOptions name="TypeScript" />
+  </settings>
+</component>
