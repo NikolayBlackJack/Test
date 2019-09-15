@@ -19,17 +19,17 @@
         <app-question></app-question>
       </div>
       <div id="cont-quest">
-        <div id="progress-indicator-container" >
+        <div (click)="check(); " id="progress-indicator-container" >
           <div *ngFor="let quest of quests" (click)="callQuest(quest)" id="{{quest.id}}" class="indicator"></div>
         </div>
         <div id="quest-panel">
           <div id="quest">
             <p class="text-quest"> {{quests[numQuest - 1].id}}/{{len}} Quest {{quests[numQuest - 1].id}}</p>
             <p class="text-quest">{{quests[numQuest - 1].description}}</p>
-            <p class="text-quest">answer...</p>
+            <p *ngIf="isTrueAnswer" class="text-quest"></p>
           </div>
-          <input class="quest-btn" type="button" value="Submit">
-          <input class="quest-btn" type="button" value="Next">
+          <input (click)="check(); validate() " [disabled]="boole" class="quest-btn" type="button" value="Submit">
+          <input (click)="check(); next()" class="quest-btn" type="button" value="Next">
         </div>
       </div>
     </div>

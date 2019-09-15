@@ -1,24 +1,46 @@
 
 <div>
+  <div *ngIf="quests[numQuest - 1].video" id="video-container">
+    <video src="{{quests[numQuest - 1].video}}" autoplay preload="none" type="video/mp4"  controls width="400" height="300"></video>
+  </div>
   <p>Select one: </p>
-  <div *ngIf="numQuest">
-    <div>
-      <div class="answer">
+  <div (click)="check($event)" id="quest-options" *ngIf="numQuest">
+    <div class="answer">
+      <p class="img-cont" *ngIf="quests[numQuest - 1].optionImgAnswer">
+        <img src="{{quests[numQuest - 1].optionImgAnswer.img1}}" alt="1">
+      </p>
+      <p *ngIf="quests[numQuest - 1].optionAnswer">
         {{quests[numQuest - 1].optionAnswer.answer1}}
-        <p class="check"></p>
-      </div>
-      <div class="answer">
+      </p>
+      <p  class="check fas">
+      </p>
+    </div>
+    <div class="answer">
+      <p class="img-cont" *ngIf="quests[numQuest - 1].optionImgAnswer">
+        <img src="{{quests[numQuest - 1].optionImgAnswer.img2}}" alt="2">
+      </p>
+      <p  *ngIf="quests[numQuest - 1].optionAnswer">
         {{quests[numQuest - 1].optionAnswer.answer2}}
-        <p class="check"></p>
-      </div>
-      <div class="answer">
+      </p>
+      <p class="check fas"></p>
+    </div>
+    <div class="answer">
+      <p class="img-cont" *ngIf="quests[numQuest - 1].optionImgAnswer">
+        <img src="{{quests[numQuest - 1].optionImgAnswer.img3}}" alt="3">
+      </p>
+      <p id="answer3" *ngIf="quests[numQuest - 1].optionAnswer">
         {{quests[numQuest - 1].optionAnswer.answer3}}
-        <p class="check"></p>
-      </div>
-      <div class="answer">
+      </p>
+      <p class="check fas"></p>
+    </div>
+    <div class="answer">
+      <p class="img-cont" *ngIf="quests[numQuest - 1].optionImgAnswer">
+        <img src="{{quests[numQuest - 1].optionImgAnswer.img4}}" alt="4">
+      </p>
+      <p *ngIf="quests[numQuest - 1].optionAnswer">
         {{quests[numQuest - 1].optionAnswer.answer4}}
-        <p class="check"></p>
-      </div>
+      </p>
+      <p class="check fas"></p>
     </div>
   </div>
 </div>

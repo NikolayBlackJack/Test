@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Quests} from "./mock-date/quests";
-import {Quest} from "./Model/Quest";
 import {Subject} from "rxjs";
+
+
 
 @Component({
   selector: 'app-root',
@@ -10,15 +11,27 @@ import {Subject} from "rxjs";
 })
 export class AppComponent implements OnInit{
 
+  isDisabled = new Subject<boolean>();
+  sub = new Subject<number>();
   quests = Quests;
   len: number;
-  sub = new Subject<number>();
   numQuest = 1;
+  boole = true;
+  answer = new Subject<string>();
+  isAnswer = "";
+  isTrueAnswer = false;
+
+
+  constructor() {
+    this.isDisabled.subscribe(x => this.boole = x);
+  }
+
 
   ngOnInit() {
     this.showHiden();
     this.callQuest(this.quests[0]);
     this.len = this.quests.length;
+
   }
 
   callQuest(quest) {
@@ -27,13 +40,30 @@ export class AppComponent implements OnInit{
   }
 
   description() {
-    this.sub.subscribe(x => this.numQuest = x)
+    this.sub.subscribe(x => this.numQuest = x);
   }
+
 
   showHiden(): void {
     let menu = document.querySelector('aside');
-    menu.style.width == "250px"
+    menu.style.width == "200px"
       ? menu.style.width = "10px"
-      : menu.style.width =  "250px";
+      : menu.style.width =  "200px";
   }
+
+  check() {
+    if(this.boole == false) return this.boole = true;
+  }
+
+  next():any  {
+    return  this.quests[this.numQuest]
+  }
+
+  validate() {
+    this.answer.subscribe(x => this.isAnswer = x)
+    if (this.quests[this.numQuest - 1].answer == this.isAnswer) {
+      console.log(this.isAnswer)
+    }
+  }
+
 }

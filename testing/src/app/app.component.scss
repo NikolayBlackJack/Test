@@ -25,7 +25,7 @@ aside {
   display: flex;
   overflow: hidden;
   transition: all 0.5s ease-out;
-  width: 250px;
+  width: 200px;
   div {
     margin: 20px 10px;
     display: flex;
@@ -67,7 +67,6 @@ aside {
 #quest-panel {
   height: 85vh;
   border: 2px solid #0000005c;
-  border-bottom: none;
   display: flex;
   flex-wrap: wrap;
 }
