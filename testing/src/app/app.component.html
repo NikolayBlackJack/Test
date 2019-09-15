@@ -11,7 +11,7 @@
   <main >
     <aside>
       <div>
-        <p *ngFor="let quest  of quests" class="quest" (click)="callQuest(quest)">Quest{{quest.id}}</p>
+        <p *ngFor="let quest  of quests" class="quest" (click)="callQuest(quest); checkChecd();">Quest{{quest.id}}</p>
       </div>
     </aside>
     <div id="quests-container">
@@ -19,17 +19,33 @@
         <app-question></app-question>
       </div>
       <div id="cont-quest">
-        <div (click)="check(); " id="progress-indicator-container" >
+        <div (click)="check(); checkChecd(); " id="progress-indicator-container" >
           <div *ngFor="let quest of quests" (click)="callQuest(quest)" id="{{quest.id}}" class="indicator"></div>
         </div>
         <div id="quest-panel">
           <div id="quest">
             <p class="text-quest"> {{quests[numQuest - 1].id}}/{{len}} Quest {{quests[numQuest - 1].id}}</p>
             <p class="text-quest">{{quests[numQuest - 1].description}}</p>
-            <p *ngIf="isTrueAnswer" class="text-quest"></p>
+            <div *ngIf="isTrueAnswer" id="isTrueAnswer" class="text-quest">
+              <p *ngIf="quests[numQuest - 1].optionAnswer">
+                {{quests[numQuest - 1].answer}}
+              </p>
+              <p class="img-cont" *ngIf="quests[numQuest - 1].optionImgAnswer">
+                <img src="{{quests[numQuest - 1].answer}}">
+              </p>
+            </div>
+            <div *ngIf="isAnswer" id="isAnswer">
+              <p *ngIf="quests[numQuest - 1].optionAnswer">
+                 {{isAnswer}}
+              </p>
+              <p class="img-cont" *ngIf="quests[numQuest - 1].optionImgAnswer">
+                <img src="{{isAnswer}}">
+              </p>
+            </div>
+
           </div>
           <input (click)="check(); validate() " [disabled]="boole" class="quest-btn" type="button" value="Submit">
-          <input (click)="check(); next()" class="quest-btn" type="button" value="Next">
+          <input (click)="check(); next(quests[numQuest - 1])" class="quest-btn" type="button" value="Next">
         </div>
       </div>
     </div>

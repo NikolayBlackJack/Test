@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Quests} from "./mock-date/quests";
-import {Subject} from "rxjs";
-
+import { QuestionService } from "./question.service";
+import { QuestionComponent } from "./question/question.component";
+import {Quest} from "./Model/Quest";
 
 
 @Component({
@@ -11,19 +12,17 @@ import {Subject} from "rxjs";
 })
 export class AppComponent implements OnInit{
 
-  isDisabled = new Subject<boolean>();
-  sub = new Subject<number>();
   quests = Quests;
   len: number;
   numQuest = 1;
   boole = true;
-  answer = new Subject<string>();
-  isAnswer = "";
   isTrueAnswer = false;
+  isAnswer: string;
 
 
-  constructor() {
-    this.isDisabled.subscribe(x => this.boole = x);
+  constructor(private question: QuestionService, private question1: QuestionComponent) {
+    this.question.isDisabled.subscribe(x => this.boole = x);
+    this.question.answer.subscribe(x => this.isAnswer = x);
   }
 
 
@@ -35,34 +34,53 @@ export class AppComponent implements OnInit{
   }
 
   callQuest(quest) {
-    this.sub.next(quest.id);
+    this.question.sub.next(quest.id);
     this.description();
+    this.isAnswer = "";
+    this.isTrueAnswer = false;
   }
 
   description() {
-    this.sub.subscribe(x => this.numQuest = x);
+    this.question.sub.subscribe(x => this.numQuest = x);
   }
 
 
   showHiden(): void {
     let menu = document.querySelector('aside');
-    menu.style.width == "200px"
-      ? menu.style.width = "10px"
-      : menu.style.width =  "200px";
+    menu.style.width == "200px" ? menu.style.width = "10px" : menu.style.width =  "200px";
   }
 
   check() {
     if(this.boole == false) return this.boole = true;
   }
 
-  next():any  {
-    return  this.quests[this.numQuest]
+  checkChecd() {
+    this.question1.checkChecd();
+  }
+
+  next(quest: Quest)  {
+    this.isAnswer = "";
+    this.isTrueAnswer = false;
+    this.validate();
+    this.callQuest(quest);
+    return  quest[this.numQuest += 1];
   }
 
   validate() {
-    this.answer.subscribe(x => this.isAnswer = x)
+    let indicator = document.getElementById(`${this.quests[this.numQuest - 1].id}`);
+    let isAn = document.getElementById("isAnswer");
+
+    console.log(this.quests[this.numQuest - 1].answer == this.isAnswer);
     if (this.quests[this.numQuest - 1].answer == this.isAnswer) {
-      console.log(this.isAnswer)
+      indicator.style.backgroundColor = "green";
+      this.isTrueAnswer = true;
+      isAn.style.backgroundColor = "green";
+    } else if (this.isAnswer == ""){
+      return 0;
+    } else {
+      indicator.style.backgroundColor = 'red';
+      this.isTrueAnswer = true;
+      isAn.style.backgroundColor = "red";
     }
   }
 

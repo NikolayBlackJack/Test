@@ -17,7 +17,7 @@ import { QuestionComponent } from './question/question.component';
     AppRoutingModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [QuestionComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
